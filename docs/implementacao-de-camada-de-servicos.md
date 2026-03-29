@@ -87,4 +87,4 @@ public class DicasService {
 
 # Implementação do repositório em memória
 
-[Implementação do repositório em memória](docs/implementacao-do-repositorio-em-memoria.md)
+[Implementação do repositório em memória](../docs/implementacao-do-repositorio-em-memoria.md)

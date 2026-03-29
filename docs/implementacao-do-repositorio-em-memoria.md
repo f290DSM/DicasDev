@@ -131,5 +131,5 @@ public class Main {
 
 # Implementação do repositório em banco de dados MySQL
 
-[Implementação do repositório em banco de dados MySQL](docs/implementacao-do-repositorio-em-banco-de-dados-mysql.md)
+[Implementação do repositório em banco de dados MySQL](../docs/implementacao-do-repositorio-em-banco-de-dados-mysql.md)
 
