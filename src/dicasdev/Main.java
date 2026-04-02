@@ -1,9 +1,13 @@
 package dicasdev;
 
+import dicasdev.model.dao.DicasDAO;
+import dicasdev.model.dao.impl.MySqlDAO;
 import dicasdev.model.domain.Dica;
+import dicasdev.model.factories.ConexaoFactory;
 import dicasdev.model.repositories.IDicasRepository;
-import dicasdev.model.repositories.impl.EmMemoriaDicasRepository;
+import dicasdev.model.repositories.impl.MySqlDicasRepository;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,26 +22,43 @@ public class Main {
         dica.titulo = "Dica de ouro Java";
         
         // Criar repository
-        IDicasRepository repository = new EmMemoriaDicasRepository();
+        Connection connection =  ConexaoFactory.getConexao();
+        DicasDAO dao = new MySqlDAO(connection);
+        IDicasRepository repository = new MySqlDicasRepository(dao);
+
+        //TODO: Criar banco de dados e tabela no MySQL - Execute o script SQL abaixo
+        // TODO: O script SQL está comentado abaixo, você precisa executá-lo no MySQL
+
+        /**
+            CREATE DATABASE IF NOT EXISTS fatec;
+            CREATE TABLE fatec.dicas (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            titulo VARCHAR(255) NOT NULL,
+            descricao TEXT NOT NULL,
+            data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+          );
+         */
 
         // Criar dica
         repository.criar(dica);
 
-        // Buscar dica
-        Dica dicaEncontrada = repository.buscarPorId(1);
-        System.out.println(dicaEncontrada);
-        List<Dica> dicas = repository.buscarTodas();
-        System.out.println(dicas);
+        // TODO: Faça um select no banco de dados para verificar se a dica foi criada
+
+        // // Buscar dica
+        // Dica dicaEncontrada = repository.buscarPorId(1);
+        // System.out.println(dicaEncontrada);
+        // List<Dica> dicas = repository.buscarTodas();
+        // System.out.println(dicas);
         
-        // Alterar dica
-        dica.descricao = "Sempre aplique o SOLID";
-        Dica dicaAlterada = repository.buscarPorId(1);
-        System.out.println(dicaAlterada);
+        // // Alterar dica
+        // dica.descricao = "Sempre aplique o SOLID";
+        // Dica dicaAlterada = repository.buscarPorId(1);
+        // System.out.println(dicaAlterada);
         
-        // Apagar dica
-        repository.apagar(1);
-        dicas = repository.buscarTodas();
-        System.out.println(dicas);
+        // // Apagar dica
+        // repository.apagar(1);
+        // dicas = repository.buscarTodas();
+        // System.out.println(dicas);
 
         //TODO: Implementar testes com Camada de Serviços
     }

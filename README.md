@@ -126,9 +126,8 @@ Utilizando o MySQL Workbench ou qualquer outro cliente MySQL:
 
 ```sql
 -- Crie a tabela no banco de dados
-CREATE DATABASE IF NOT EXISTS dicasdev;
-USE dicasdev;
-CREATE TABLE dicas (
+CREATE DATABASE IF NOT EXISTS fatec;
+CREATE TABLE fatec.dicas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
     descricao TEXT NOT NULL,
