@@ -10,7 +10,14 @@ import dicasdev.model.domain.Dica;
 
 public class MySqlDAO implements DicasDAO {
 
+    /**
+     * Conexão com o banco de dados via injeção de dependência
+     */
     private final Connection connection;
+    
+    /**
+     * Logger para registrar eventos e erros
+     */
     private static final Logger logger = Logger.getLogger(MySqlDAO.class.getName());
 
     public MySqlDAO(Connection connection) {
@@ -21,6 +28,8 @@ public class MySqlDAO implements DicasDAO {
     public Dica criar(Dica dica) {
         logger.info("Criando dica: " + dica);
         final String query = "INSERT INTO fatec.dicas (titulo, descricao) VALUES ('%s', '%s')";
+
+        // Uso de TryWithResources para garantir que o Statement seja fechado
         try (Statement stm = connection.createStatement()) {
             stm.execute(String.format(query, dica.titulo, dica.descricao));
         } catch (Exception e) {

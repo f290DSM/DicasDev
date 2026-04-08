@@ -26,19 +26,6 @@ public class Main {
         DicasDAO dao = new MySqlDAO(connection);
         IDicasRepository repository = new MySqlDicasRepository(dao);
 
-        //TODO: Criar banco de dados e tabela no MySQL - Execute o script SQL abaixo
-        // TODO: O script SQL está comentado abaixo, você precisa executá-lo no MySQL
-
-        /**
-            CREATE DATABASE IF NOT EXISTS fatec;
-            CREATE TABLE fatec.dicas (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            titulo VARCHAR(255) NOT NULL,
-            descricao TEXT NOT NULL,
-            data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-          );
-         */
-
         // Criar dica
         repository.criar(dica);
 
