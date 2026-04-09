@@ -93,8 +93,18 @@ public class MySqlDAO implements DicasDAO {
 
     @Override
     public Dica atualizar(Dica dica) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
+        String queryTemplate = "UPDATE fatec.dicas" + 
+        " SET titulo='%s', descricao='%s' WHERE id=%d";
+        try (Statement stm = connection.createStatement()) {
+            stm.execute(String.format(
+                queryTemplate, 
+                dica.titulo, 
+                dica.descricao, 
+                dica.id));
+        } catch (Exception e) {
+            logger.severe("Erro ao atualizar dica: " + e.getMessage());
+        }
+        return dica;
     }
 
 }
