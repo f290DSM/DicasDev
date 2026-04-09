@@ -1,7 +1,9 @@
 package dicasdev.model.dao.impl;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -54,8 +56,21 @@ public class MySqlDAO implements DicasDAO {
 
     @Override
     public List<Dica> buscarTodas() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarTodas'");
+        List<Dica> dicas = new ArrayList<>();
+        String query = "SELECT id, titulo, descricao FROM fatec.dicas;";
+        try (Statement stm = connection.createStatement();
+                ResultSet rst = stm.executeQuery(query)) {
+            while (rst.next()) {
+                var dica = new Dica();
+                dica.id = rst.getInt("id");
+                dica.titulo = rst.getString("titulo");
+                dica.descricao = rst.getString("descricao");
+                dicas.add(dica);
+            }
+        } catch (Exception e) {
+            logger.severe("Erro ao buscar dicas: " + e.getMessage());
+        }
+        return dicas;
     }
 
     @Override
@@ -69,6 +84,5 @@ public class MySqlDAO implements DicasDAO {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
     }
-    
-    
+
 }
