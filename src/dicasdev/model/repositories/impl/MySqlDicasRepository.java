@@ -20,27 +20,23 @@ public class MySqlDicasRepository implements IDicasRepository {
     }
 
     @Override
-    public void apagar(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'apagar'");
+    public void apagar(Integer id) throws Exception {
+        dao.apagar(id);
     }
 
     @Override
     public List<Dica> buscarTodas() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarTodas'");
+        return dao.buscarTodas();
     }
 
     @Override
     public Dica buscarPorId(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarPorId'");
+        return dao.buscarPorId(id);
     }
 
     @Override
     public Dica atualizar(Dica dica) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
+        return dao.atualizar(dica);
     }
 
 }
