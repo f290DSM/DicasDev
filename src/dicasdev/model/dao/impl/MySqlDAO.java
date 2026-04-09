@@ -75,8 +75,20 @@ public class MySqlDAO implements DicasDAO {
 
     @Override
     public Dica buscarPorId(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarPorId'");
+        Dica dica = null;
+        String query = "SELECT id, titulo, descricao FROM fatec.dicas WHERE id = " + id + ";";
+        try (Statement stm = connection.createStatement();
+                ResultSet rst = stm.executeQuery(query)) {
+            if (rst.next()) {
+                dica = new Dica();
+                dica.id = rst.getInt("id");
+                dica.titulo = rst.getString("titulo");
+                dica.descricao = rst.getString("descricao");
+            }
+        } catch (Exception e) {
+            logger.severe("Erro ao buscar dica: " + e.getMessage());
+        }
+        return dica;
     }
 
     @Override
