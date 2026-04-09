@@ -14,7 +14,7 @@ public class MySqlDAO implements DicasDAO {
      * Conexão com o banco de dados via injeção de dependência
      */
     private final Connection connection;
-    
+
     /**
      * Logger para registrar eventos e erros
      */
@@ -40,10 +40,16 @@ public class MySqlDAO implements DicasDAO {
     }
 
     @Override
-    public void apagar(Integer id) {
+    public void apagar(Integer id) throws Exception {
         logger.info("Apagando dica com id: " + id);
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'apagar'");
+        String query = "DELETE FROM fatec.dicas WHERE id = " + id;
+        try (Statement stm = connection.createStatement()) {
+            stm.execute(query);
+            logger.info("Dica excluída com sucesso. ID: " + id);
+        } catch (Exception e) {
+            logger.severe("Erro ao apagar dica: " + e.getMessage());
+            throw e;
+        }
     }
 
     @Override
